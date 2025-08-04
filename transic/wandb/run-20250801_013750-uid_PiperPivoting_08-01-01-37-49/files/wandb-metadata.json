@@ -1,0 +1,35 @@
+{
+    "os": "Linux-6.8.0-65-generic-x86_64-with-glibc2.17",
+    "python": "3.8.20",
+    "heartbeatAt": "2025-08-01T05:37:53.098768",
+    "startedAt": "2025-08-01T05:37:50.753441",
+    "docker": null,
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "gpu_count": 1,
+    "cpu_count": 32,
+    "cuda": null,
+    "args": [
+        "task=PiperPivoting",
+        "num_envs=4096",
+        "sim_device=cuda:0",
+        "rl_device=cuda:0",
+        "graphics_device_id=0",
+        "wandb_activate=true",
+        "wandb_entity=wendyhgnewman-southern-university-of-science-technology",
+        "wandb_project=transcl",
+        "display=false",
+        "headless=true"
+    ],
+    "state": "running",
+    "program": "main/rl/train.py",
+    "codePath": "main/rl/train.py",
+    "git": {
+        "remote": "https://github.com/transic-robot/transic",
+        "commit": "9af4ff7a392d9b033bb3a05d16f1aaa1aa2472d6"
+    },
+    "email": "2384447291@qq.com",
+    "root": "/home/zenbot-slj/Desktop/transicgym/transic",
+    "host": "zenbotslj-MS-7E47",
+    "username": "zenbot-slj",
+    "executable": "/home/zenbot-slj/miniconda3/envs/transic/bin/python3"
+}

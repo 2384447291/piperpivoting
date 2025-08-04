@@ -1,0 +1,455 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.12.21
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    python_version: 3.8.20
+    start_time: 1754026186
+    t:
+      1:
+      - 1
+      - 5
+      - 41
+      - 50
+      - 53
+      - 55
+      2:
+      - 1
+      - 5
+      - 41
+      - 50
+      - 53
+      - 55
+      3:
+      - 4
+      - 13
+      - 14
+      - 35
+      4: 3.8.20
+      5: 0.12.21
+      8:
+      - 6
+capture_video:
+  desc: null
+  value: false
+checkpoint:
+  desc: null
+  value: ''
+display:
+  desc: null
+  value: false
+experiment:
+  desc: null
+  value: ''
+from_ckpt_epoch:
+  desc: null
+  value: false
+graphics_device_id:
+  desc: null
+  value: 0
+headless:
+  desc: null
+  value: true
+max_iterations:
+  desc: null
+  value: 9999999999999
+min_episode_length:
+  desc: null
+  value: 20
+multi_gpu:
+  desc: null
+  value: false
+n_parallel_recorders:
+  desc: null
+  value: 8
+n_successful_videos_to_record:
+  desc: null
+  value: 50
+num_envs:
+  desc: null
+  value: 4096
+num_rollouts_to_save:
+  desc: null
+  value: 10000
+num_subscenes:
+  desc: null
+  value: 4
+num_threads:
+  desc: null
+  value: 4
+physics_engine:
+  desc: null
+  value: physx
+pipeline:
+  desc: null
+  value: gpu
+rl_device:
+  desc: null
+  value: cuda:0
+rl_train:
+  desc: null
+  value:
+    params:
+      algo:
+        name: ppo
+      config:
+        bounds_loss_coef: 0.0001
+        clip_value: true
+        critic_coef: 4
+        e_clip: 0.2
+        entropy_coef: 0.0
+        env_name: rlgpu
+        full_experiment_name: PiperPivoting
+        gamma: 0.99
+        grad_norm: 1.0
+        horizon_length: 32
+        kl_threshold: 0.008
+        learning_rate: 0.0005
+        lr_schedule: adaptive
+        max_epochs: 9999999999999
+        mini_epochs: 5
+        minibatch_size: 16384
+        mixed_precision: false
+        multi_gpu: false
+        name: PiperPivoting
+        normalize_advantage: true
+        normalize_input: true
+        normalize_input_excluded_keys: []
+        normalize_value: true
+        num_actors: 4096
+        ppo: true
+        print_stats: true
+        reward_shaper:
+          scale_value: 1.0
+        save_best_after: 100
+        save_frequency: 50
+        schedule_type: standard
+        score_to_win: 10000
+        seq_len: 4
+        tau: 0.95
+        truncate_grads: true
+        value_bootstrap: true
+      load_checkpoint: false
+      load_path: ''
+      model:
+        name: my_continuous_a2c_logstd
+      network:
+        dict_feature_encoder:
+          _target_: transic.nn.features.SimpleFeatureFusion
+          activation: relu
+          add_input_activation: false
+          add_output_activation: false
+          extractors:
+            privileged:
+              _target_: transic.nn.features.Identity
+              input_dim: 57
+            proprioception:
+              _target_: transic.nn.features.Identity
+              input_dim: 26
+          hidden_depth: 1
+          hidden_dim: 256
+          output_dim: 256
+        mlp:
+          activation: elu
+          d2rl: false
+          initializer:
+            name: default
+          regularizer:
+            name: None
+          units:
+          - 256
+          - 128
+          - 64
+        name: dict_obs_actor_critic
+        separate: false
+        space:
+          continuous:
+            fixed_sigma: true
+            mu_activation: None
+            mu_init:
+              name: default
+            sigma_activation: None
+            sigma_init:
+              name: const_initializer
+              val: 0
+      seed: 2346
+save_rollouts:
+  desc: null
+  value: false
+save_successful_rollouts_only:
+  desc: null
+  value: true
+seed:
+  desc: null
+  value: 2346
+sigma:
+  desc: null
+  value: ''
+sim_device:
+  desc: null
+  value: cuda:0
+solver_type:
+  desc: null
+  value: 1
+task:
+  desc: null
+  value:
+    env:
+      actionScale: 1.0
+      aggregateMode: 3
+      angleReward: 1.0
+      clipActions: 1.0
+      clipObservations: 5.0
+      enableCameraSensors: false
+      episodeLength: 100
+      furniture: just_one_leg
+      numEnvs: 4096
+      obsKeys:
+      - q
+      - cos_q
+      - sin_q
+      - eef_pos
+      - eef_quat
+      - gripper_width
+      oriErrorThreshold: 1.0
+      piperDefaultDofPos:
+      - 0.0
+      - 1.5
+      - -0.5
+      - 0.0
+      - -0.8
+      - 0.0
+      - 0.0
+      - 0.0
+      piperDofNoise: 0.2
+      privilegedObsDim: 57
+      privilegedObsKeys:
+      - leg_pos
+      - leg_rot
+      - leg_vel
+      - eef_vel
+      - ftip_center_pos
+      - obstacle_front_pos
+      - obstacle_left_pos
+      - obstacle_right_pos
+      - front_wall_cf
+      - left_wall_cf
+      - right_wall_cf
+      - leg_cf
+      - eef_lf_pos
+      - eef_rf_pos
+      - dq
+      propDumpInfo:
+        eef_pos: 3
+        eef_quat: 4
+        gripper_width: 1
+        q: 6
+      propObsDim: 26
+      successReward: 200.0
+      useQuatRot: false
+    name: PiperPivoting
+    physics_engine: physx
+    seed: 2346
+    sim:
+      dt: 0.01667
+      gravity:
+      - 0.0
+      - 0.0
+      - -9.81
+      physx:
+        bounce_threshold_velocity: 0.2
+        contact_collection: 0
+        contact_offset: 0.005
+        default_buffer_size_multiplier: 5.0
+        max_depenetration_velocity: 1000.0
+        max_gpu_contact_pairs: 1048576
+        num_position_iterations: 8
+        num_subscenes: 4
+        num_threads: 4
+        num_velocity_iterations: 1
+        rest_offset: 0.0
+        solver_type: 1
+        use_gpu: true
+      substeps: 2
+      up_axis: z
+      use_gpu_pipeline: true
+    task:
+      randomization_params:
+        actor_params:
+          leg:
+            color: true
+            rigid_body_properties:
+              mass:
+                distribution: uniform
+                operation: scaling
+                range:
+                - 0.5
+                - 1.5
+                schedule: linear
+                schedule_steps: 100000000
+                setup_only: true
+            rigid_shape_properties:
+              compliance:
+                distribution: uniform
+                operation: additive
+                range:
+                - 0.0
+                - 1.0
+                schedule: linear
+                schedule_steps: 100000000
+              friction:
+                distribution: uniform
+                num_buckets: 250
+                operation: scaling
+                range:
+                - 0.5
+                - 1.5
+                schedule: linear
+                schedule_steps: 100000000
+              restitution:
+                distribution: uniform
+                operation: additive
+                range:
+                - 0.0
+                - 1.0
+                schedule: linear
+                schedule_steps: 100000000
+              rolling_friction:
+                distribution: uniform
+                num_buckets: 250
+                operation: scaling
+                range:
+                - 0.5
+                - 1.5
+                schedule: linear
+                schedule_steps: 100000000
+              torsion_friction:
+                distribution: uniform
+                num_buckets: 250
+                operation: scaling
+                range:
+                - 0.5
+                - 1.5
+                schedule: linear
+                schedule_steps: 100000000
+            scale:
+              distribution: uniform
+              operation: scaling
+              range:
+              - 0.9
+              - 1.1
+              schedule: linear
+              schedule_steps: 100000000
+              setup_only: true
+          piper:
+            color: true
+            dof_properties:
+              damping:
+                distribution: loguniform
+                operation: scaling
+                range:
+                - 1.0
+                - 1.010050167084168
+                schedule: linear
+                schedule_steps: 100000000
+              lower:
+                distribution: loguniform
+                operation: scaling
+                range:
+                - 1.0
+                - 1.010050167084168
+                schedule: linear
+                schedule_steps: 100000000
+              stiffness:
+                distribution: loguniform
+                operation: scaling
+                range:
+                - 1.0
+                - 1.010050167084168
+                schedule: linear
+                schedule_steps: 100000000
+              upper:
+                distribution: loguniform
+                operation: scaling
+                range:
+                - 1.0
+                - 1.010050167084168
+                schedule: linear
+                schedule_steps: 100000000
+            rigid_body_properties:
+              mass:
+                distribution: uniform
+                operation: scaling
+                range:
+                - 0.5
+                - 1.5
+                schedule: linear
+                schedule_steps: 100000000
+                setup_only: true
+            rigid_shape_properties:
+              friction:
+                distribution: uniform
+                num_buckets: 250
+                operation: scaling
+                range:
+                - 0.7
+                - 1.3
+                schedule: linear
+                schedule_steps: 100000000
+          table:
+            color: true
+            rigid_shape_properties:
+              friction:
+                distribution: uniform
+                num_buckets: 250
+                operation: scaling
+                range:
+                - 0.5
+                - 1.5
+                schedule: linear
+                schedule_steps: 100000000
+        frequency: 1
+        sim_params:
+          gravity:
+            distribution: uniform
+            operation: additive
+            range:
+            - 0
+            - 0.4
+            schedule: linear
+            schedule_steps: 100000000
+      randomize: true
+task_name:
+  desc: null
+  value: PiperPivoting
+test:
+  desc: null
+  value: false
+torch_deterministic:
+  desc: null
+  value: false
+wandb_activate:
+  desc: null
+  value: true
+wandb_entity:
+  desc: null
+  value: wendyhgnewman-southern-university-of-science-technology
+wandb_group:
+  desc: null
+  value: ''
+wandb_logcode_dir:
+  desc: null
+  value: ''
+wandb_name:
+  desc: null
+  value: PiperPivoting
+wandb_project:
+  desc: null
+  value: transcl
+wandb_tags:
+  desc: null
+  value: []
