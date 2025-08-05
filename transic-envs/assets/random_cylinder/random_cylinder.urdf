@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot name="cylinder">
+  <link name="cylinder_link">
+    <visual>
+      <!-- Rotate the cylinder so its length is along the link's Y-axis -->
+      <origin xyz="0 0 0" rpy="1.57079632679 0 0" />
+      <geometry>
+        <cylinder length="0.3" radius="0.025"/>
+      </geometry>
+      <material name="grey">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+    </visual>
+    <collision>
+      <!-- Rotate the cylinder so its length is along the link's Y-axis -->
+      <origin xyz="0 0 0" rpy="1.57079632679 0 0" />
+      <geometry>
+        <cylinder length="0.3" radius="0.025"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <!-- Rotate the inertia frame to align with the collision/visual geometry -->
+      <origin xyz="0 0 0" rpy="1.57079632679 0 0" />
+      <mass value="0.1"/>
+      <!-- Physically plausible inertia tensor for a cylinder of mass=0.1, r=0.025, h=0.3, rotated to align with Y-axis -->
+      <!-- I_yy is now along the axis of symmetry -->
+      <inertia ixx="0.0007656" ixy="0" ixz="0" iyy="0.00003125" iyz="0" izz="0.0007656"/>
+    </inertial>
+  </link>
+</robot>

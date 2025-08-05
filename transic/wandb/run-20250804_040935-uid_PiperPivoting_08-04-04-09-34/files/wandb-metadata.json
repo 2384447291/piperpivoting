@@ -1,0 +1,35 @@
+{
+    "os": "Linux-6.8.0-65-generic-x86_64-with-glibc2.17",
+    "python": "3.8.20",
+    "heartbeatAt": "2025-08-04T08:09:36.805154",
+    "startedAt": "2025-08-04T08:09:35.504347",
+    "docker": null,
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "gpu_count": 1,
+    "cpu_count": 32,
+    "cuda": null,
+    "args": [
+        "task=PiperPivoting",
+        "num_envs=2048",
+        "sim_device=cuda:0",
+        "rl_device=cuda:0",
+        "graphics_device_id=0",
+        "wandb_activate=true",
+        "wandb_entity=wendyhgnewman-southern-university-of-science-technology",
+        "wandb_project=transcl",
+        "display=false",
+        "headless=true"
+    ],
+    "state": "running",
+    "program": "main/rl/train.py",
+    "codePath": "transic/main/rl/train.py",
+    "git": {
+        "remote": "git@github.com:2384447291/piperpivoting.git",
+        "commit": "cbff0f7702376882ad3660ce319d650aaa3e7974"
+    },
+    "email": "2384447291@qq.com",
+    "root": "/home/zenbot-slj/Desktop/piperpivoting",
+    "host": "zenbotslj-MS-7E47",
+    "username": "zenbot-slj",
+    "executable": "/home/zenbot-slj/miniconda3/envs/transic/bin/python3"
+}

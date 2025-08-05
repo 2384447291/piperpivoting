@@ -36,6 +36,12 @@ class PiperPivotingEnv(PiperEnvOSC):
         
         # 存储初始计算的坐标系信息（改为存储矩阵形式）
         self._init_coordinate_frames = None  # 将在 reset_idx 首次被真正分配为矩阵形式
+        
+        # 存储每个环境中腿的尺寸 [radius, length]
+        self.leg_dimensions = None
+
+        self.np_random = np.random.RandomState(cfg["seed"])
+
 
         #导入正向运动学的包
         try:
@@ -152,7 +158,7 @@ class PiperPivotingEnv(PiperEnvOSC):
 
         leg2ftip_center_transform[0, 3] = 0.01
         leg2ftip_center_transform[1, 3] = 0
-        leg2ftip_center_transform[2, 3] = -0.01
+        leg2ftip_center_transform[2, 3] = -self.furniture.parts[0].top_grap
 
         leg2ftip_center_transform = leg2ftip_center_transform.unsqueeze(0).repeat(
             num_resets, 1, 1
@@ -380,7 +386,6 @@ class PiperPivotingEnv(PiperEnvOSC):
             ori_error_threshold=self._ori_error_threshold,
         )
 
-
 @torch.jit.script
 def compute_reach_and_grasp_single_reward(
     reset_buf,
@@ -434,8 +439,6 @@ def compute_reach_and_grasp_single_reward(
     
     # 转换为角度
     pitch_diff = abs(90 - (angle_diff_rad * 180.0 / 3.1415926))  # (N,) - 单位是度
-
-    print(f"pitch_diff: {pitch_diff}")
 
     succeeded = (pitch_diff < ori_error_threshold)
     succeeded = succeeded * grasp_leg_mask

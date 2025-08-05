@@ -1,8 +1,11 @@
 import numpy as np
 import numpy.typing as npt
+import os
+from lxml import etree
 
 from transic_envs.envs.core.furniture.furniture_parts.base import Part
 from transic_envs.utils.pose_utils import get_mat, rot_mat, is_similar_rot
+from transic_envs.asset_root import ASSET_ROOT
 
 
 class Leg(Part):
@@ -65,5 +68,49 @@ class SquareTableLeg(Leg):
         super().__init__(part_config, part_idx, seed)
 
         self.reset_gripper_width = 0.06
+        self.grasp_margin_x = 0
+        self.grasp_margin_z = 0
+
+
+class RandomCylinderLeg(Leg):
+    def __init__(self, part_config, part_idx, seed):
+        # This part is created procedurally, so we don't need the original asset file.
+        # However, we'll use it as a template.
+        template_asset_file = "random_cylinder/random_cylinder.urdf" 
+
+        # Randomize cylinder properties
+        self.random = np.random.RandomState(seed)
+        self.length = self.random.uniform(0.1, 0.2)
+        self.radius = self.random.uniform(0.01, 0.02)
+        self.top_grap = self.length*0.3
+
+        # Create a unique path for the modified URDF.
+        temp_dir = os.path.join(ASSET_ROOT, "random_cylinder", f"temp_{part_idx}_{self.random.randint(0, 100000)}")
+        os.makedirs(temp_dir, exist_ok=True)
+        temp_urdf_path = os.path.join(temp_dir, "random_cylinder.urdf")
+
+        # Modify the URDF with the new dimensions
+        urdf_path = os.path.join(ASSET_ROOT, template_asset_file)
+        tree = etree.parse(urdf_path)
+        root = tree.getroot()
+
+        for cylinder in root.iter('cylinder'):
+            cylinder.set('length', str(self.length))
+            cylinder.set('radius', str(self.radius))
+
+        tree.write(temp_urdf_path, pretty_print=True, xml_declaration=True, encoding="utf-8")
+
+        # Update the asset file path in the part_config FOR THIS INSTANCE
+        part_config['asset_file'] = os.path.relpath(temp_urdf_path, ASSET_ROOT)
+
+        self.tag_offset = self.radius
+        self.half_width = self.radius
+        
+        super().__init__(part_config, part_idx, seed)
+
+        self.reset_x_len = self.radius * 2 + 0.02
+        self.reset_y_len = self.length
+        
+        self.reset_gripper_width = self.radius * 2
         self.grasp_margin_x = 0
         self.grasp_margin_z = 0

@@ -4,6 +4,7 @@ from transic_envs.envs.core.furniture.base import Furniture
 from transic_envs.envs.core.furniture.furniture_parts import (
     SquareTableLeg,
     SquareTableTop,
+    RandomCylinderLeg,
 )
 
 
@@ -27,6 +28,10 @@ class SquareTable(Furniture):
             SquareTableLeg(
                 furniture_conf["square_table_leg4"], 4, self.new_random_seed
             ),
+            # Add the new random cylinder leg as the 6th part (index 5)
+            RandomCylinderLeg(
+                furniture_conf["square_table_leg4"], 5, self.new_random_seed # Using leg4 config as a template
+            )
         ]
         self.num_parts = len(self.parts)
 
@@ -66,7 +71,8 @@ class OneLeg(SquareTable):
 class JustOneLeg(OneLeg):
     def __init__(self, seed):
         super().__init__(seed)
-        self.parts = [self.parts[2]]
+        # Use the newly added RandomCylinderLeg, which is the last part in the list.
+        self.parts = [self.parts[-1]]
         self.parts[0].name = "leg"
         self.num_parts = len(self.parts)
 
